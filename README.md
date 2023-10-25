@@ -1,2 +1,2 @@
-# CS4341A1
-# Test Message
+#CS 4341 Assignment A1
+#Matthew McAlarney
