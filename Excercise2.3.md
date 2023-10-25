@@ -6,10 +6,11 @@ answer with examples or counterexamples where appropriate.
 a. An agent that senses only partial information about the state cannot be perfectly rational.
 
     False
-    If an agent senses only partial information about the state, it ccan still be perfectly rational. 
-    Rational agents should be autonomous, which means that they have the capacity to learn and build off of their prior knowledge of the environment regardless of the extent of that knowledge.
-    For example, a table-cleaning agent could be perfectly rational, and as part of that, be able to learn how to anticipate when and where new germs and bacteria will surface. 
-    In the above example, the table-cleaning agent is rational as long as it selects actions that maximize its performance measure according to the information in the percept sequence and the amount of prior knowledge of the environment.
+    If an agent senses only partial information about the state, it can still be perfectly rational.
+    Rational agents can operate in a partially observable environment as their percept sequence is based on the content that their sensors percieve.
+    In addition, rational agents should be autonomous, which means that they have the capacity to learn and build off of their prior knowledge of the environment and its state regardless of the extent of that knowledge.
+    For example, a table-cleaning agent could be perfectly rational in a partially observable environment, and as part of that, be able to learn how to anticipate when and where new germs and bacteria will surface. 
+    In the above example, the table-cleaning agent is rational if it selects actions that maximize its performance measure according to the information for each possible percept sequence (dependent on the content that the sensors percieve) and the amount of prior knowledge of the environment. In particular, as long as the agent is selecting actions that maximize its performance measure based on each possible percept sequence, it is rational regardless of whether the sensors provide access to the complete state of the environment at each point in time. 
 
 b. There exist task environments in which no pure reflex agent can behave rationally.
 
