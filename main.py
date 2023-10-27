@@ -18,13 +18,18 @@
 
 # Task Environment: Environment class is the external environment
 # with the WorldPosition class used to help construct the environment.
+
 # Performance measure/score calculated in the
-# SimpleReflexVacuumAgent's update_performance_score function increases by 1 each time the agent cleans a dirty square.
-# Sensors feed information to the SimpleReflexVacuumAgent's specify_agent_action function. Actuator for cleaning
-# dirty squares and moving between locations in the environment is defined in the SimpleReflexVacuumAgent's
-# execute_action function.
+# SimpleReflexVacuumAgent's update_performance_score function.
+# Put rationale here: increases by 1 each time the agent cleans a dirty square.
+
+# Sensors feed information to the SimpleReflexVacuumAgent's specify_agent_action function.
+
+# Actuator for cleaning dirty squares and moving between locations
+# in the environment is defined in the SimpleReflexVacuumAgent's execute_action function.
+
 # The SimpleReflexVacuumAgent has a run_agent_actions function that puts the agent into action
-# and only finished when both locations A and B have a status of Clean.
+# and only finishes when both locations A and B have a status of Clean.
 
 class Environment:
 
@@ -79,7 +84,13 @@ class SimpleReflexVacuumCleaningAgent:
         return self.performance_score
 
     def run_agent_actions(self):
-        while self.env.world[0].status == "Dirty" or self.env.world[1].status == "Dirty": #Ask about this line of code here.
+        while self.env.world[0].status == "Dirty" or self.env.world[
+            1].status == "Dirty":
+            # Ask about this line of code here.
+            # Keep track of a memory variable instead to meet the condition as the agent
+            # can only perceive the square it is in and whether it is dirty or not.
+            # Specify ALL assumptions.
+            # I am assuming that dirt WILL NOT reappear in a square after it is cleaned.
             self.execute_action(self.specify_agent_action())
         print("The Vacuum Cleaning Agent has finished running and locations A and B both have a status of Clean.")
 
