@@ -61,15 +61,15 @@ class SimpleReflexVacuumCleaningAgent:
         if action == "Suck":
             self.env.world[self.current_vacuum_world_position_index].status = "Clean"
             self.update_performance_score()
-            print("Action: Suck" + " Current Location: " +
+            print("Action: Suck" + " -> Same Location: " +
                   self.env.world[self.current_vacuum_world_position_index].location)
         elif action == "Right":
             self.current_vacuum_world_position_index += 1
-            print("Action: Right" + " New Location: " +
+            print("Action: Right" + " -> New Location: " +
                   self.env.world[self.current_vacuum_world_position_index].location)
         elif action == "Left":
             self.current_vacuum_world_position_index -= 1
-            print("Action: Left" + " New Location: " +
+            print("Action: Left" + " -> New Location: " +
                   self.env.world[self.current_vacuum_world_position_index].location)
 
     def update_performance_score(self):
@@ -79,7 +79,7 @@ class SimpleReflexVacuumCleaningAgent:
         return self.performance_score
 
     def run_agent_actions(self):
-        while self.env.world[0].status == "Dirty" or self.env.world[1].status == "Dirty":
+        while self.env.world[0].status == "Dirty" or self.env.world[1].status == "Dirty": #Ask about this line of code here.
             self.execute_action(self.specify_agent_action())
         print("The Vacuum Cleaning Agent has finished running and locations A and B both have a status of Clean.")
 
@@ -110,12 +110,15 @@ initial_world_position_index_list = [0, 0, 0, 0, 1, 1, 1, 1]
 performance_score_list = []
 
 for index, c in enumerate(configuration_list):
+    print("--")
     vacuum_cleaning_agent = SimpleReflexVacuumCleaningAgent(c, initial_world_position_index_list[index])
-    print("Running Vacuum Cleaning Agent")
+    print("Running Vacuum Cleaning Agent for configuration at index " + str(index) + "\n")
     vacuum_cleaning_agent.run_agent_actions()
+    print("")
     performance_score_list.append(vacuum_cleaning_agent.get_performance_score())
     print("Performance Score for Vacuum Cleaning Agent: " +
           str(performance_score_list[index]))
+    print("--\n")
 
 
 def calculate_average_performance_score():
