@@ -16,25 +16,48 @@
 # [(A, Dirty), (B, Clean)], initial vacuum cleaner location = B
 # [(A, Dirty), (B, Dirty)], initial vacuum cleaner location = B
 
-# Task Environment and Assumptions:
+# Task Environment and Key Assumptions:
+
+# Task Environment:
 
 # Environment class is the external environment
-# with the WorldPosition class used to help construct the environment.
+# with the WorldPosition class used to help construct that environment.
 
 # Performance measure/score calculated in the
 # SimpleReflexVacuumAgent's update_performance_score function.
+# The performance score is an integer that is incremented each time the agent performs the sucking action
+# on a dirty square. The reasoning for calculating the performance score in this manner goes as follows; the
+# the primary intention of the SimpleReflexVacuumAgent (and a vacuum cleaner in general) is arguably to
+# clean dirty squares through sucking in all the dirt. Therefore, the performance measure should evaluate
+# the agent's ability to carry out this primary intention. The agent is programmed such that it will clean dirty squares
+# through the sucking action as frequently as possible; that is, the agent will perform the sucking action
+# for every dirty square that it perceives. Thus, for each action that the agent executes,
+# it is expected that the performance measure (how many times the agent
+# successfully carries out its primary intention of cleaning dirty squares) will be maximized given the
+# initial environment configuration and agent location.
 
 # Sensors feed information to the SimpleReflexVacuumAgent's specify_agent_action function.
 
 # Actuator for cleaning dirty squares and moving between locations
 # in the environment is defined in the SimpleReflexVacuumAgent's execute_action function.
 
-# The SimpleReflexVacuumAgent has a run_agent_actions function that triggers a loop of actions that the agent executes
-# and only finishes when both locations A and B have a status of Clean.
+# The SimpleReflexVacuumAgent has a run_agent_actions function that triggers a loop of actions that the agent executes.
 
-#Assumptions:
+# SimpleReflexVacuumAgent has a clean_square_counter variable that keeps track of
+# how many squares the agent has visited and confirmed a status of clean.
+# The clean_square_counter variable is part of a condition
+# in the run_agent_actions function used to regulate the loop of executed actions.
 
-#After the vacuum cleaning agent has sucked dirt from a square (and that square then becomes clean),
+# Key Assumptions:
+
+# After the vacuum cleaning agent has sucked dirt from a square (and that square then becomes clean), the square
+# CANNOT become dirty again.
+# If a square begins with a status of clean, it cannot become dirty
+# following the instantiation of the initial configuration.
+# The Vacuum Cleaning Agent only finishes executing actions in its run_agent_actions function when the agent
+# has checked upon visiting that both squares A and B have a status of clean.
+# That is, the loop of executed actions in the run_agent_actions function
+# only finishes when the clean_square_counter is equal to 2.
 
 class Environment:
 
@@ -54,6 +77,7 @@ class SimpleReflexVacuumCleaningAgent:
     def __init__(self, env, current_vacuum_world_position_index):
         self.env = env
         self.current_vacuum_world_position_index = current_vacuum_world_position_index
+        self.clean_square_counter = 0
         self.performance_score = 0
         print("Initial location of the Vacuum Cleaning agent is " +
               self.env.world[self.current_vacuum_world_position_index].location)
@@ -75,10 +99,12 @@ class SimpleReflexVacuumCleaningAgent:
                   self.env.world[self.current_vacuum_world_position_index].location)
         elif action == "Right":
             self.current_vacuum_world_position_index += 1
+            self.clean_square_counter += 1
             print("Action: Right" + " -> New Location: " +
                   self.env.world[self.current_vacuum_world_position_index].location)
         elif action == "Left":
             self.current_vacuum_world_position_index -= 1
+            self.clean_square_counter += 1
             print("Action: Left" + " -> New Location: " +
                   self.env.world[self.current_vacuum_world_position_index].location)
 
@@ -89,12 +115,7 @@ class SimpleReflexVacuumCleaningAgent:
         return self.performance_score
 
     def run_agent_actions(self):
-        while self.env.world[0].status == "Dirty" or self.env.world[
-            1].status == "Dirty":
-            # Keep track of a memory variable instead to meet the condition as the agent
-            # can only perceive the square it is in and whether it is dirty or not.
-            # Specify ALL assumptions.
-            # I am assuming that dirt WILL NOT reappear in a square after it is cleaned.
+        while self.clean_square_counter < 2:
             self.execute_action(self.specify_agent_action())
         print("The Vacuum Cleaning Agent has finished running and locations A and B both have a status of Clean.")
 
