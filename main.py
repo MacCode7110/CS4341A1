@@ -16,20 +16,25 @@
 # [(A, Dirty), (B, Clean)], initial vacuum cleaner location = B
 # [(A, Dirty), (B, Dirty)], initial vacuum cleaner location = B
 
-# Task Environment: Environment class is the external environment
+# Task Environment and Assumptions:
+
+# Environment class is the external environment
 # with the WorldPosition class used to help construct the environment.
 
 # Performance measure/score calculated in the
 # SimpleReflexVacuumAgent's update_performance_score function.
-# Put rationale here: increases by 1 each time the agent cleans a dirty square.
 
 # Sensors feed information to the SimpleReflexVacuumAgent's specify_agent_action function.
 
 # Actuator for cleaning dirty squares and moving between locations
 # in the environment is defined in the SimpleReflexVacuumAgent's execute_action function.
 
-# The SimpleReflexVacuumAgent has a run_agent_actions function that puts the agent into action
+# The SimpleReflexVacuumAgent has a run_agent_actions function that triggers a loop of actions that the agent executes
 # and only finishes when both locations A and B have a status of Clean.
+
+#Assumptions:
+
+#After the vacuum cleaning agent has sucked dirt from a square (and that square then becomes clean),
 
 class Environment:
 
@@ -86,7 +91,6 @@ class SimpleReflexVacuumCleaningAgent:
     def run_agent_actions(self):
         while self.env.world[0].status == "Dirty" or self.env.world[
             1].status == "Dirty":
-            # Ask about this line of code here.
             # Keep track of a memory variable instead to meet the condition as the agent
             # can only perceive the square it is in and whether it is dirty or not.
             # Specify ALL assumptions.
