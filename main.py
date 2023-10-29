@@ -82,7 +82,9 @@ class SimpleReflexVacuumCleaningAgent:
         print("Initial location of the Vacuum Cleaning agent is " +
               self.env.world[self.current_vacuum_world_position_index].location)
 
-    # Agent function, which specifies the action the agent should take:
+    # Agent function, which specifies the action the agent should take.
+    # Agent function has pre-built knowledge of which squares and statuses it is checking for in
+    # the environment as demonstrated in the pseudocode for the textbook Figure 2.8.
     def specify_agent_action(self):
         if self.env.world[self.current_vacuum_world_position_index].status == "Dirty":
             return "Suck"
