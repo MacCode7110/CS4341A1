@@ -2,4 +2,4 @@
 #Matthew McAlarney
 
 #Important Notes:
-    #main.py contains Exercise 2.9
+    #main.py contains code for Exercise 2.9
