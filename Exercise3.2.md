@@ -58,7 +58,7 @@ space now?
                 II. Let x = the number of square units the robot is able to occupy that DO NOT mark the intersection of two or more corridors.
                 III. Let y = the number of square units that mark the intersection of two or more corridors.
                 IIII. We know that at most (considering that there may be square units that are not possible to occupy), x + y sums to n. For x, there are at most two compass directions the robot can face. For y, there are four possible compass directions the robot can face.
-                IV. According to the reasoning listed above, the state space size consists of two parts added together to form an expression: (a maximum of 2x + 4y) + (a certain number of reasonable positions outside of the maze)
+                IV. According to the reasoning listed above, the state space size consists of two parts added together to form an expression: (a maximum of 2x + 4y) + (a certain number of reasonable positions the robot can occupy outside of the maze)
         Initial State: The robot occupies the square unit in the center of the maze and is rotated to face north.
         Goal States: The robot occupies a position that is outside of either the north, east, south, or west borders of the maze (in other words, the robot occupies a position outside of the area of the maze as a result of moving through a maze exit).
         Updated Actions: 
